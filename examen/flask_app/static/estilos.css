@@ -1,0 +1,224 @@
+/* Estilos del cuerpo de la página */
+body {
+  /* Tipografía principal: Inter. Varios respaldos si la anterior no carga */
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* Color principal del texto (azul muy oscuro) */
+  color: #0f172a;
+
+  /* Fondo con 2 gradientes radiales para dar un estilo suave y elegante */
+  background: radial-gradient(1200px 400px at 30% -20%, #e0f2fe 0%, #f8fafc 60%),
+              radial-gradient(800px 300px at 90% -10%, #ede9fe 0%, #f8fafc 70%);
+
+  min-height: 100vh; /* Asegura que cubra toda la pantalla */
+
+  /* Hace que el fondo se quede fijo al hacer scroll */
+  background-attachment: fixed;
+}
+
+/* Quita el subrayado de todos los enlaces */
+a { text-decoration: none; }
+
+/* Ajusta el ancho máximo de los contenedores */
+.container { max-width: 1000px; }
+
+
+
+/* ============================
+   NAVBAR PERSONALIZADA
+   ============================ */
+
+.nav-personalizado {
+  /* Fondo con un degradado elegante de gris oscuro a azul */
+  background: linear-gradient(90deg, #1f2937 0%, #0d6efd 100%);
+  color: #fff; /* Texto blanco */
+  padding: 16px 20px; /* Espaciado interno */
+  border-radius: 14px; /* Bordes redondeados */
+  
+  /* Sombra suave para darle profundidad */
+  box-shadow: 0 10px 20px rgba(13, 110, 253, 0.25);
+
+  /* Efecto de saturación y desenfoque que da sensación de cristal */
+  backdrop-filter: saturate(1.2) blur(4px);
+}
+
+/* Estilo del título dentro del navbar */
+.nav-personalizado h1 {
+  margin: 0; /* Quita espacio */
+  font-weight: 700; /* Negrita fuerte */
+  letter-spacing: .3px; /* Espaciado entre letras para mejorar la estética */
+}
+
+
+
+/* ============================
+   TARJETAS GENERALES
+   ============================ */
+
+.card {
+  border: none; /* Quita bordes estándar */
+  border-radius: 16px; /* Bordes redondeados */
+  
+  /* Sombra sutil */
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+
+  /* Efecto de movimiento suave */
+  transition: transform .15s ease, box-shadow .15s ease;
+
+  /* Animación de aparición hacia arriba */
+  animation: fadeUp .35s ease both;
+}
+
+/* Efecto al pasar el mouse (hover) */
+.card:hover {
+  transform: translateY(-2px); /* La tarjeta sube un poquito */
+  box-shadow: 0 16px 30px rgba(0,0,0,.12); /* Más sombra */
+}
+
+/* Encabezado de tarjetas */
+.card-header {
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+  background: linear-gradient(90deg, #0f172a, #1e3a8a); /* Degradado azul */
+}
+
+
+
+/* ============================
+   CAJAS DE LOGIN/REGISTRO
+   ============================ */
+
+.caja-login {
+  background: #fff; /* Fondo blanco */
+  padding: 28px; /* Relleno interno */
+  border-radius: 14px; /* Bordes redondeados */
+
+  /* Sombra para dar profundidad */
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+
+  /* Borde muy sutil en azul */
+  border: 1px solid rgba(13,110,253,.15);
+
+  animation: fadeUp .35s ease both;
+}
+
+
+
+/* ============================
+   INPUTS Y FORMULARIOS
+   ============================ */
+
+label {
+  font-weight: 600; /* Texto más fuerte */
+  color: #334155; /* Azul grisáceo */
+}
+
+/* Estilo general de inputs y selects */
+.form-control, .form-select, textarea {
+  border: 1px solid #d1d5db; /* Borde gris claro */
+  border-radius: 12px; /* Bordes suaves */
+  transition: box-shadow .2s ease, border-color .2s ease; /* Animación */
+}
+
+/* Efecto al hacer clic/seleccionar */
+.form-control:focus, .form-select:focus, textarea:focus {
+  border-color: #0d6efd; /* Borde azul */
+  box-shadow: 0 0 0 0.2rem rgba(13,110,253,.2); /* Glow azul */
+}
+
+/* Permite cambiar el tamaño del textarea verticalmente */
+textarea { resize: vertical; }
+
+
+
+/* ============================
+   BOTONES
+   ============================ */
+
+.btn {
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 6px 12px rgba(0,0,0,.08); /* Sombra suave */
+  transition: transform .1s ease, box-shadow .15s; /* Animación */
+}
+
+/* Hover general de los botones */
+.btn:hover {
+  transform: translateY(-1px); /* Sube un poco */
+  box-shadow: 0 10px 18px rgba(0,0,0,.12);
+}
+
+/* Colores personalizados */
+.btn-primary { background:#0d6efd; border-color:#0d6efd; }
+.btn-primary:hover { background:#0b5ed7; border-color:#0b5ed7; }
+
+.btn-success { background:#16a34a; border-color:#16a34a; }
+.btn-success:hover { background:#15803d; border-color:#15803d; }
+
+.btn-warning { background:#f59e0b; border-color:#f59e0b; color:#111827; }
+.btn-warning:hover { background:#d97706; border-color:#d97706; color:#111827; }
+
+.btn-danger { background:#dc2626; border-color:#dc2626; }
+.btn-danger:hover { background:#b91c1c; border-color:#b91c1c; }
+
+.btn-info { background:#0ea5e9; border-color:#0ea5e9; color:#fff; }
+.btn-info:hover { background:#0284c7; border-color:#0284c7; }
+
+.btn-light { background:#ffffff; border-color:#e5e7eb; }
+
+
+
+/* ============================
+   ALERTAS Y NOTAS
+   ============================ */
+
+.alert { border-radius: 12px; }
+
+/* Caja amarilla informativa */
+.nota-amarilla {
+  background-color: #fff3cd; /* Amarillo claro */
+  border: 1px solid #ffeeba; /* Borde amarillo */
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+
+  /* Sombra ligera */
+  box-shadow: 0 6px 12px rgba(0,0,0,.06);
+}
+
+
+
+/* ============================
+   DETALLES PEQUEÑOS
+   ============================ */
+
+/* Texto pequeño gris */
+small.text-muted { color: #64748b !important; }
+
+/* Línea divisora */
+hr { border-top: 1px solid #e5e7eb; }
+
+/* Títulos con texto degradado */
+.section-title {
+  font-weight: 700;
+  background: linear-gradient(90deg,#0ea5e9,#8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Oculta el color del texto para mostrar el degradado */
+}
+
+
+
+/* ============================
+   ANIMACIONES
+   ============================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0; /* Comienza invisible */
+    transform: translateY(6px); /* Un poco abajo */
+  }
+  to {
+    opacity: 1; /* Aparece */
+    transform: translateY(0); /* Se mueve hacia su posición original */
+  }
+}

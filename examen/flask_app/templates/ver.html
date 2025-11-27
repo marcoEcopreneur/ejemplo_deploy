@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{# Esta línea indica que esta plantilla hereda de "base.html",
+   lo que significa que usará la estructura general definida allí #}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='ver.css') }}">
+{% endblock %}
+{# Aquí estamos diciendo que este bloque agregará CSS extra,
+   en este caso, el archivo "ver.css" que está en la carpeta static #}
+
+{% block contenido %}
+{# Todo lo que está dentro de este bloque reemplazará el bloque "contenido" de base.html #}
+
+<div class="container mt-4">
+    <div class="page-bar">
+        <h2 class="section-title">Ver Asesoría</h2>
+        <div>
+            <a href="/inicio" class="btn btn-light me-2">Inicio</a>
+            <a href="/salir" class="btn btn-danger">Cerrar Sesión</a>
+        </div>
+    </div>
+    {# Esta sección muestra la barra superior con el título y botones de navegación #}
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-dark text-white">
+            <h3>{{ asesoria.tema }}</h3>
+        </div>
+        {# El encabezado de la tarjeta muestra el tema de la asesoría #}
+
+        <div class="card-body">
+            <h5 class="card-title">Solicitado por: {{ asesoria.creador_nombre }}</h5>
+            <hr>
+            <p><strong>Fecha:</strong> {{ asesoria.fecha }}</p>
+            <p><strong>Duración:</strong> {{ asesoria.duracion }} Horas</p>
+            <p><strong>Notas:</strong></p>
+
+            <div class="alert alert-light border">
+                {{ asesoria.notas }}
+            </div>
+            {# Aquí mostramos los detalles básicos de la asesoría: fecha, duración y notas #}
+
+            <!-- BONUS: Selector para cambiar Tutor en vista VER -->
+            {# Esta es una sección EXTRA (bonus) para cambiar el tutor desde la misma vista #}
+            <div class="tutor-block block-accent mt-4">
+                <h5>Asignación de Tutor (BONUS)</h5>
+
+                <form action="/cambiar_tutor" method="post" class="d-flex gap-2 align-items-end">
+                    {# Este formulario envía los datos al backend para actualizar el tutor asignado #}
+
+                    <!-- Pasamos todos los datos ocultos para el update simple -->
+                    <input type="hidden" name="id" value="{{ asesoria.id }}">
+                    <input type="hidden" name="tema" value="{{ asesoria.tema }}">
+                    <input type="hidden" name="fecha" value="{{ asesoria.fecha }}">
+                    <input type="hidden" name="duracion" value="{{ asesoria.duracion }}">
+                    <input type="hidden" name="notas" value="{{ asesoria.notas }}">
+                    {# Estos datos ocultos permiten que el backend conserve la información original
+                       sin tener que hacer otra consulta adicional #}
+
+                    <div class="flex-grow-1">
+                        <label class="form-label">
+                            Tutor Actual:
+                            <strong>{{ asesoria.tutor_nombre if asesoria.tutor_nombre else 'Nadie' }}</strong>
+                        </label>
+                        {# Aquí mostramos el tutor actual o "Nadie" si aún no hay uno asignado #}
+
+                        <select name="tutor_id" class="form-select" required>
+                            {# Este select mostrará todos los usuarios disponibles como posibles tutores #}
+
+                            {% for usuario in usuarios %}
+                                {# Recorremos la lista de usuarios que enviamos desde el backend #}
+
+                                {% if usuario.id != asesoria.usuario_id %}
+                                    {# Evitamos que el creador de la asesoría aparezca como posible tutor #}
+
+                                    <option value="{{ usuario.id }}"
+                                        {% if usuario.id == asesoria.tutor_id %}selected{% endif %}>
+                                        {# Si este usuario es el tutor actual, aparece seleccionado #}
+
+                                        {{ usuario.nombre }} {{ usuario.apellido }}
+                                    </option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Guardar Tutor</button>
+                    {# Botón para enviar el formulario y guardar el nuevo tutor #}
+                </form>
+
+                <small class="text-muted">
+                    Cualquier usuario puede cambiar el tutor (excepto el creador de la asesoría).
+                </small>
+                {# Nota informativa o regla visual para el usuario #}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{# Aqui termina el bloque "contenido" #}

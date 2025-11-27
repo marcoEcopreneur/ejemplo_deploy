@@ -1,0 +1,70 @@
+/* Barra superior donde va el título y los botones */
+.page-bar{
+    margin-top:8px; /* Deja un pequeño espacio hacia arriba */
+    display:flex; /* Acomoda los elementos en fila */
+    justify-content:space-between; /* Un elemento a la izquierda y otro a la derecha */
+    align-items:center; /* Centra verticalmente */
+}
+
+/* Estilo para los botones dentro de la barra */
+.page-bar .btn{
+    border:1px solid #e5e7eb; /* Bordecito gris claro */
+    border-radius:999px; /* Bordes súper redondeados (parecen píldoras) */
+    padding:6px 14px; /* Espaciado interno para que se vean más cómodos */
+}
+
+/* Tarjeta principal donde se muestra la asesoría */
+.card.shadow-lg{
+    border-radius:18px; /* Bordes más redondeados */
+    overflow:hidden; /* Evita que el contenido sobresalga de la tarjeta */
+}
+
+/* Encabezado de la tarjeta */
+.card-header{
+    /* Fondo con degradado de colores azul oscuro a azul más claro */
+    background:linear-gradient(90deg,#0f172a,#1e3a8a)!important;
+}
+
+/* Título dentro del card-header */
+.card-header h3{
+    margin:0; /* Quita el espacio de arriba y abajo */
+    font-weight:700; /* Lo hace más grueso y notorio */
+}
+
+/* Caja de notas que aparece como un "alert" con borde */
+.alert.border{
+    border-radius:14px; /* Bordes redondeados */
+}
+
+/* Contenedor especial donde se muestra el selector de tutor */
+.tutor-block{
+    margin-top:10px; /* Da un espacio superior */
+}
+
+/* Estilo del select (lista desplegable) del tutor */
+.tutor-block .form-select{
+    border-color:#9ec5fe; /* Borde azul clarito */
+}
+
+/* Estilo del título "Asignación de Tutor (BONUS)" */
+.tutor-block h5{
+    font-weight:700; /* Texto más grueso */
+    /* Efecto de texto degradado usando variables CSS */
+    background:linear-gradient(90deg,var(--accent2),var(--accent1));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent; /* Esto hace visible el degradado en vez del color del texto */
+}
+
+/* Texto pequeño debajo del selector */
+.tutor-block small{
+    color:var(--muted); /* Usa un color más suave definido en variables */
+}
+
+/* Bloque estilo tarjeta usado como contenedor del selector */
+.block-accent{
+    background:#f1f5f9; /* Fondo gris muy claro */
+    border:1px solid #dbe2ea; /* Borde sutil */
+    border-radius:14px; /* Bordes redondeados */
+    padding:12px; /* Espacio interno */
+}

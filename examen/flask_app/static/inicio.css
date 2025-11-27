@@ -1,0 +1,75 @@
+/* Barra superior personalizada donde está el saludo y los botones */
+.nav-personalizado{
+    margin-top:16px; /* Deja espacio hacia arriba para que no esté pegado al borde */
+}
+
+/* Estilos para los botones dentro de la barra personalizada */
+.nav-personalizado .btn{
+    border:1px solid rgba(255,255,255,.5); /* Borde blanco transparente */
+    border-radius:999px; /* Bordes muy redondeados estilo "píldora" */
+    padding:6px 14px; /* Espaciado interno para que el botón se vea más cómodo */
+    box-shadow:0 6px 12px rgba(0,0,0,.12); /* Sombra suave para levantar visualmente el botón */
+}
+
+/* Fila donde se muestra cada asesoría (título, fecha, botones, etc.) */
+.asesoria-row{
+    display:flex; /* Alinear elementos en fila */
+    gap:18px; /* Espacio entre los elementos */
+    align-items:flex-start; /* Alinea los items en la parte superior */
+}
+
+/* Columna izquierda: tema y fecha */
+.col-left{
+    flex:0 0 38%; /* Ocupa un 38% del ancho total */
+}
+
+/* Columna derecha: información del tutor, duración y botones */
+.col-right{
+    flex:1; /* Ocupa el resto del espacio disponible */
+    display:flex; /* Sus elementos internos también se acomodan en fila */
+    justify-content:space-between; /* Deja espacio entre los elementos */
+    align-items:center; /* Centra verticalmente */
+    border-left:2px solid #e5e7eb; /* Línea separadora entre columnas */
+    padding-left:16px; /* Espacio para que el contenido no quede pegado a la línea */
+}
+
+/* Ajustes generales de la tarjeta */
+.card{
+    position:relative; /* Permite posicionar elementos dentro de ella si se usa position absolute */
+}
+
+/* Título dentro de cada tarjeta de asesoría */
+.card .card-title{
+    font-weight:700; /* Texto grueso (negrita) para resaltar */
+}
+
+/* Botones en el grupo de acciones (ver, editar, borrar) */
+.card .btn-group .btn{
+    min-width:92px; /* Asegura que todos los botones tengan el mismo tamaño mínimo */
+}
+
+/* Contenedor para elementos pequeños como la fecha */
+.item-meta{
+    display:flex; /* Pone items en fila */
+    gap:8px; /* Espacio entre ellos */
+    align-items:center; /* Centrados verticalmente */
+}
+
+/* Ajuste de la etiqueta fecha (badge) */
+.item-meta .badge-chip{
+    margin-right:6px; /* Espacio a la derecha para separar mejor */
+}
+
+/* Media Query: estilos para pantallas pequeñas (celulares) */
+@media (max-width: 768px){
+  .asesoria-row{
+    flex-direction:column; /* Todo se acomoda en columna (uno debajo del otro) */
+  }
+  .col-left{
+    flex:1; /* Ahora ocupará todo el ancho disponible */
+  }
+  .col-right{
+    border-left:none; /* Quitamos la línea porque en móvil ya no tiene sentido */
+    padding-left:0; /* Quitamos el espacio porque ya no hay borde */
+  }
+}

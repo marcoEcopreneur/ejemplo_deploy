@@ -1,0 +1,85 @@
+{# Esta línea indica que esta página usa la plantilla base.html como estructura principal #}
+{% extends "base.html" %}
+
+{# Aquí se carga un archivo CSS adicional específico para esta página usando url_for #}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='crear.css') }}">{% endblock %}
+
+{# Aquí empieza el contenido principal que se va a meter en el bloque "contenido" de la plantilla base #}
+{% block contenido %}
+<div class="container mt-4">
+
+    {# Esta es una especie de barra superior con el título de la página y botones #}
+    <div class="page-bar">
+        <h2 class="section-title">Solicitar Asesoría</h2>
+        <div>
+            {# Botón para volver al inicio del sistema #}
+            <a href="/inicio" class="btn btn-light me-2">Inicio</a>
+            {# Botón para cerrar sesión #}
+            <a href="/salir" class="btn btn-danger">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    {# Este mensaje es fijo, probablemente visible cuando hay un error (lo manejan con JS o CSS) #}
+    <div class="hint-error">Notas no puede estar vacía</div>
+
+    {# Esto muestra mensajes enviados desde flash() pero solo los de categoría 'asesoria' #}
+    {% with messages = get_flashed_messages(category_filter=['asesoria']) %}
+        {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                    {# Imprime cada mensaje de error que exista #}
+                    <p class="mb-0">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {# Este formulario envía los datos a la ruta /crear_asesoria usando POST #}
+    <form action="/crear_asesoria" method="post" class="card p-4 shadow-sm">
+        
+        <div class="mb-3">
+            <label>Tema:</label>
+            {# Campo para escribir el tema de la asesoría #}
+            <input type="text" name="tema" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label>Fecha:</label>
+            {# Selector de fecha para la asesoría #}
+            <input type="date" name="fecha" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            <label>Duración (Horas):</label>
+            {# Campo numérico que solo permite entre 1 y 8 horas #}
+            <input type="number" name="duracion" class="form-control" min="1" max="8" placeholder="1-8">
+        </div>
+
+        <div class="mb-3">
+            <label>Notas:</label>
+            {# Area de texto para notas adicionales, con máximo 50 caracteres #}
+            <textarea name="notas" class="form-control" maxlength="50"></textarea>
+            <small class="text-muted">Máximo 50 caracteres</small>
+        </div>
+
+        {# BONUS: Selector de tutor, obligatorio para crear la asesoría #}
+        <div class="mb-3 p-3 bg-light border rounded">
+            <label><strong>BONUS:</strong> Elegir Tutor (Obligatorio)</label>
+            <select name="tutor_id" class="form-select" required>
+                {# Se recorre la lista de usuarios para mostrarlos como opciones #}
+                {% for usuario in usuarios %}
+                    {# Se evita que aparezca el propio usuario como tutor para sí mismo #}
+                    {% if usuario.id != session['usuario_id'] %}
+                        <option value="{{ usuario.id }}">
+                            {{ usuario.nombre }} {{ usuario.apellido }}
+                        </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        {# Botón final para enviar el formulario #}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+{% endblock %}

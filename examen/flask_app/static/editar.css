@@ -1,0 +1,62 @@
+/* Barra superior donde van los botones de navegación (Inicio / Cerrar sesión).
+   Se usa flexbox para alinear elementos horizontalmente y separarlos. */
+.page-bar {
+  margin-top: 8px;                          /* Espacio superior */
+  display: flex;                             /* Activa Flexbox */
+  justify-content: space-between;            /* Un elemento a la izq y otro a la derecha */
+  align-items: center;                       /* Alinea verticalmente al centro */
+}
+
+/* Estilo para los botones dentro de la barra superior.
+   Border-radius muy grande (999px) crea efecto de píldora. */
+.page-bar .btn {
+  border: 1px solid #e5e7eb;                 /* Borde gris claro */
+  border-radius: 999px;                      /* Forma de cápsula */
+  padding: 6px 14px;                         /* Espaciado interno */
+}
+
+/* Texto de advertencia para errores.
+   Se pone en rojo y en negritas para que resalte. */
+.hint-error {
+  color: #dc2626;                            /* Rojo fuerte */
+  font-weight: 700;                          /* Negrita */
+  margin-bottom: 10px;                       /* Separación inferior */
+}
+
+/* Tarjeta principal que contiene el formulario.
+   border-radius suaviza los bordes. */
+.card.p-4 {
+  border-radius: 16px;
+}
+
+/* Espaciado entre secciones del formulario. */
+.form-section {
+  margin-bottom: 14px;
+}
+
+/* Bloque con fondo gris claro para destacar una sección del formulario (BONUS).
+   Muy usado para agrupar opciones importantes. */
+.block-accent {
+  background: #f1f5f9;       /* Gris suave */
+  border-color: #dbe2ea;     /* Borde del mismo tono */
+}
+
+/* Aumenta el peso de los labels dentro del bloque BONUS para que resalten. */
+.block-accent label {
+  font-weight: 700;
+}
+
+/* Estilo del selector dentro del bloque.
+   Se cambia el color del borde para que combine con el tema. */
+.block-accent select {
+  border-color: #a7b3c2;
+}
+
+/* Es un elemento decorativo automático. */
+.block-accent::before {
+  content: "BONUS";            /* Texto que aparece arriba */
+  display: inline-block;       /* Lo trata como un bloque corto */
+  margin-bottom: 8px;          /* Espacio debajo del texto */
+  color: #1f2937;              /* Gris oscuro */
+  font-weight: 700;            /* Negritas */
+}

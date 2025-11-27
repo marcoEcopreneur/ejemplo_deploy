@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{# Esta plantilla hereda toda la estructura del archivo base.html #}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='entrar.css') }}">
+{% endblock %}
+{# Aquí cargamos un archivo CSS extra llamado "entrar.css",
+   que contiene los estilos específicos de esta página #}
+
+{% block contenido %}
+{# Todo el contenido a partir de aquí reemplazará el bloque "contenido" en base.html #}
+
+<div class="container mt-5">
+    <div class="row justify-content-center gap-4 auth-wrapper">
+        
+        <!-- Registro -->
+        {# Primera caja: formulario de registro de nuevos usuarios #}
+        <div class="col-md-5 caja-login">
+            <h2 class="text-center mb-4">Registro</h2>
+
+            {% with messages = get_flashed_messages(category_filter=['registro']) %}
+                {% if messages %}
+                    <div class="alert alert-danger">
+                        {% for message in messages %}
+                            <p class="mb-0">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {# Este bloque muestra mensajes de error relacionados con el registro.
+               Los mensajes vienen desde el backend usando "flash()" #}
+
+            <form action="/registro" method="post">
+                {# Formulario que envía los datos al backend en la ruta /registro #}
+
+                <div class="mb-3">
+                    <label>Nombre:</label>
+                    <input type="text" name="nombre" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Apellido:</label>
+                    <input type="text" name="apellido" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Email:</label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Contraseña:</label>
+                    <input type="password" name="contrasena" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Confirmar Contraseña:</label>
+                    <input type="password" name="confirmar_contrasena" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                {# Botón para enviar el formulario de registro #}
+            </form>
+        </div>
+
+        <!-- Login -->
+        {# Segunda caja: formulario de inicio de sesión #}
+        <div class="col-md-5 caja-login">
+            <h2 class="text-center mb-4">Inicio de Sesión</h2>
+
+            {% with messages = get_flashed_messages(category_filter=['login']) %}
+                {% if messages %}
+                    <div class="alert alert-danger">
+                        {% for message in messages %}
+                            <p class="mb-0">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {# Este bloque muestra mensajes de error relacionados con el login #}
+
+            <form action="/login" method="post">
+                {# Formulario que envía los datos a la ruta /login para validar credenciales #}
+
+                <div class="mb-3">
+                    <label>Email:</label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Contraseña:</label>
+                    <input type="password" name="contrasena" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Iniciar Sesión</button>
+                {# Botón para enviar el formulario e iniciar sesión #}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{# Fin del bloque de contenido #}

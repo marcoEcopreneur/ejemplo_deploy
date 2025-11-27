@@ -1,0 +1,138 @@
+/* Contenedor principal de la sección de autenticación (login/registro).
+   "gap: 24px" agrega espacio entre los elementos hijos del contenedor (como si fuera margin entre ellos). */
+.auth-wrapper {
+  gap: 24px;
+}
+
+/* Caja del login (contenedor blanco de formulario).
+   Se pone "position: relative" para permitir usar un pseudo-elemento ::after dentro.
+   "overflow: hidden" oculta cualquier parte del decorado que sobresalga. */
+.caja-login {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Pseudo-elemento decorativo dentro de la caja.
+   Crea un círculo degradado borroso en una esquina para un efecto visual elegante. */
+.caja-login::after {
+  content: "";                   /* Necesario para mostrar el pseudo-elemento */
+  position: absolute;
+  
+  /* "inset" coloca el elemento: top, right, bottom, left.
+     Aquí se usa -30% para que el círculo sobresalga y luego se recorte con overflow:hidden. */
+  inset: -30% -30% auto auto;
+
+  /* Tamaño del círculo */
+  width: 160px;
+  height: 160px;
+
+  /* Degradado radial usando variables CSS personalizadas (accent1/accent2) */
+  background: radial-gradient(closest-side, var(--accent2), transparent 70%);
+
+  opacity: .15;            /* Muy suave, casi transparente */
+  transform: rotate(25deg); /* Lo inclina un poco para darle dinamismo */
+}
+
+/* Títulos dentro de la caja de login.
+   Se aplica un texto con degradado usando "background-clip:text".
+   Por eso el color se hace transparente. */
+.caja-login h2 {
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Los botones dentro de la caja de login tendrán altura fija.
+   Esto unifica la apariencia sin importar el contenido. */
+.caja-login .btn {
+  height: 42px;
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Fuerza a que los inputs tengan fondo blanco (en caso de que Bootstrap o estilos globales cambien el color). */
+.caja-login .form-control {
+  background: #fff;
+}
+
+/* Diferenciar colores entre Registro (azules) e Inicio de Sesión (verdes) */
+.auth-wrapper .caja-login:first-child { /* Registro */
+  border: 1px solid rgba(13, 110, 253, 0.25);
+}
+.auth-wrapper .caja-login:first-child::after {
+  content: "";
+  position: absolute;
+  inset: -30% -30% auto auto;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(closest-side, var(--primary), transparent 70%);
+  opacity: .18;
+  transform: rotate(25deg);
+}
+.auth-wrapper .caja-login:first-child h2 {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.auth-wrapper .caja-login:last-child { /* Inicio de Sesión */
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+.auth-wrapper .caja-login:last-child::after {
+  content: "";
+  position: absolute;
+  inset: -30% -30% auto auto;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(closest-side, var(--success), transparent 70%);
+  opacity: .18;
+  transform: rotate(25deg);
+}
+.auth-wrapper .caja-login:last-child h2 {
+  font-weight: 700;
+  color: var(--success);
+}
+
+/* Diferenciar colores entre Registro (azules) e Inicio de Sesión (verdes) */
+.auth-wrapper .caja-login:first-child { /* Registro */
+  border: 1px solid rgba(13, 110, 253, 0.25);
+}
+.auth-wrapper .caja-login:first-child::after {
+  content: "";
+  position: absolute;
+  inset: -30% -30% auto auto;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(closest-side, var(--primary), transparent 70%);
+  opacity: .18;
+  transform: rotate(25deg);
+}
+.auth-wrapper .caja-login:first-child h2 {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.auth-wrapper .caja-login:last-child { /* Inicio de Sesión */
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+.auth-wrapper .caja-login:last-child::after {
+  content: "";
+  position: absolute;
+  inset: -30% -30% auto auto;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(closest-side, var(--success), transparent 70%);
+  opacity: .18;
+  transform: rotate(25deg);
+}
+.auth-wrapper .caja-login:last-child h2 {
+  font-weight: 700;
+  color: var(--success);
+}

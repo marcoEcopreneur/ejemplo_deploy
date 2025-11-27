@@ -1,0 +1,57 @@
+.page-bar{
+    margin-top:8px;              /* Espacio superior para separar la barra de la parte de arriba */
+    display:flex;                /* Usa Flexbox para acomodar elementos horizontalmente */
+    justify-content:space-between; /* Deja un elemento a la izquierda y otro a la derecha */
+    align-items:center;          /* Centra verticalmente lo que está dentro */
+}
+
+/* Estilos para los botones dentro de la barra superior */
+.page-bar .btn{
+    border:1px solid #e5e7eb;    /* Borde gris claro */
+    border-radius:999px;         /* Hace el botón completamente redondo (tipo "píldora") */
+    padding:6px 14px;            /* Espaciado interno para que se vea más grande y cómodo */
+}
+
+/* Mensaje de error (rojo) que aparece arriba de formularios */
+.hint-error{
+    color:#dc2626;               /* Color rojo fuerte */
+    font-weight:700;             /* Texto en negrita */
+    margin-bottom:10px;          /* Espacio hacia abajo para separarlo del siguiente elemento */
+}
+
+/* Estilo para tarjetas (cards) que además tengan padding de Bootstrap (p-4) */
+.card.p-4{
+    border-radius:16px;          /* Esquinas redondeadas suaves */
+}
+
+/* Espacio entre campos individuales del formulario */
+.form-section{
+    margin-bottom:14px;
+}
+
+/* Bloque destacado para secciones "extra" o especiales */
+.block-accent{
+    background:#eaf2ff;          /* Fondo azul clarito */
+    border-color:#cfe0ff;        /* Borde azul aún más claro */
+    border-radius:14px;          /* Esquinas redondeadas */
+    padding:12px;                /* Espaciado interno cómodo */
+}
+
+/* Etiquetas dentro del bloque destacado */
+.block-accent label{
+    font-weight:700;             /* Texto en negrita */
+}
+
+/* Select dentro del bloque destacado — borde en color azul suave */
+.block-accent select{
+    border-color:#9ec5fe;
+}
+
+/* Texto que aparece *automáticamente* antes del bloque-accent */
+.block-accent::before{
+    content:"BONUS";             /* Inserta la palabra BONUS antes del bloque */
+    display:inline-block;        /* Permite aplicar espacio y estilos */
+    margin-bottom:8px;           /* Espacio hacia abajo */
+    color:#0d6efd;               /* Azul estándar Bootstrap */
+    font-weight:700;             /* Negrita */
+}

@@ -1,0 +1,88 @@
+{# Esta línea indica que esta plantilla va a usar otra plantilla llamada base.html como estructura principal #}
+{% extends "base.html" %}
+
+{# Aquí se está metiendo un archivo CSS extra solo para esta página, usando url_for para localizar el archivo dentro de static #}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='editar.css') }}">{% endblock %}
+
+{# Aquí empieza el contenido principal que irá dentro del bloque "contenido" de base.html #}
+{% block contenido %}
+<div class="container mt-4">
+
+    {# Esta sección es como una barra arriba de la página con el título y unos botones #}
+    <div class="page-bar">
+        <h2 class="section-title">Editar Asesoría</h2>
+        <div>
+            {# Botón que te regresa al inicio #}
+            <a href="/inicio" class="btn btn-light me-2">Inicio</a>
+            {# Botón para cerrar sesión #}
+            <a href="/salir" class="btn btn-danger">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    {# Mensaje fijo de error (parece que se activa con CSS o JavaScript) #}
+    <div class="hint-error">Ingrese una duración válida</div>
+
+    {# Esto muestra mensajes que vienen de flash() pero solo los que tengan categoría "asesoria" #}
+    {% with messages = get_flashed_messages(category_filter=['asesoria']) %}
+        {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                    {# Cada mensaje se imprime aquí #}
+                    <p class="mb-0">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {# Este formulario manda la información a la ruta /actualizar_asesoria #}
+    <form action="/actualizar_asesoria" method="post" class="card p-4 shadow-sm">
+
+        {# Input oculto para enviar el ID de la asesoría que estamos editando #}
+        <input type="hidden" name="id" value="{{ asesoria.id }}">
+        
+        <div class="mb-3">
+            <label>Tema:</label>
+            {# Se coloca el tema actual de la asesoría para que el usuario lo pueda modificar #}
+            <input type="text" name="tema" class="form-control" value="{{ asesoria.tema }}">
+        </div>
+
+        <div class="mb-3">
+            <label>Fecha:</label>
+            {# Aquí se pone la fecha actual de la asesoría, igual editable #}
+            <input type="date" name="fecha" class="form-control" value="{{ asesoria.fecha }}">
+        </div>
+        
+        <div class="mb-3">
+            <label>Duración (Horas):</label>
+            {# Input tipo número para controlar la duración, con mínimo y máximo #}
+            <input type="number" name="duracion" class="form-control" min="1" max="8" value="{{ asesoria.duracion }}">
+        </div>
+
+        <div class="mb-3">
+            <label>Notas:</label>
+            {# Cuadro de texto para notas adicionales, con límite de caracteres #}
+            <textarea name="notas" class="form-control" maxlength="50">{{ asesoria.notas }}</textarea>
+        </div>
+
+        {# BONUS: Selección del tutor encargado de la asesoría #}
+        <div class="mb-3 p-3 bg-light border rounded">
+            <label>Tutor (Obligatorio):</label>
+            {# Este select carga todos los usuarios excepto el usuario que está logueado actualmente #}
+            <select name="tutor_id" class="form-select" required>
+                {% for usuario in usuarios %}
+                    {% if usuario.id != session['usuario_id'] %}
+                        <option value="{{ usuario.id }}" 
+                                {# Si este tutor era el que ya estaba asignado, aparece seleccionado #}
+                                {% if usuario.id == asesoria.tutor_id %}selected{% endif %}>
+                            {{ usuario.nombre }} {{ usuario.apellido }}
+                        </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        {# Botón final para enviar los cambios #}
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+    </form>
+</div>
+{% endblock %}

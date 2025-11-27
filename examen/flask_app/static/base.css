@@ -1,0 +1,64 @@
+/* Barra superior donde van los botones (Inicio / Cerrar sesión).
+   Se usa flexbox para alinear los elementos al mismo nivel. */
+.page-bar {
+  margin-top: 8px;                          /* Espacio superior */
+  display: flex;                             /* Activa Flexbox */
+  justify-content: space-between;            /* Deja un elemento a cada extremo */
+  align-items: center;                       /* Centra verticalmente */
+}
+
+/* Botones dentro de la barra.
+   Diseño estilo "píldora" por el border-radius grande. */
+.page-bar .btn {
+  border: 1px solid #e5e7eb;                 /* Borde gris tenue */
+  border-radius: 999px;                      /* Forma redondeada tipo cápsula */
+  padding: 6px 14px;                         /* Espaciado interno */
+}
+
+/* Texto de error que aparece cuando algo no es válido.
+   Se usa rojo y negrita para que llame la atención. */
+.hint-error {
+  color: #dc2626;                            /* Rojo fuerte */
+  font-weight: 700;                          /* Negrita */
+  margin-bottom: 10px;                       /* Separación inferior */
+}
+
+/* Estilo general de la tarjeta que contiene el formulario. */
+.card.p-4 {
+  border-radius: 16px;                       /* Bordes suaves */
+}
+
+/* Espacio entre grupos o secciones del formulario. */
+.form-section {
+  margin-bottom: 14px;
+}
+
+/* Bloque que resalta la sección BONUS del formulario (selector de tutor).
+   Fondo azul muy claro para distinguirlo del resto. */
+.block-accent {
+  background: #eaf2ff;         /* Fondo azul pastel */
+  border-color: #cfe0ff;       /* Borde del mismo color suave */
+  border-radius: 14px;         /* Bordes redondeados */
+  padding: 12px;               /* Espaciado interno */
+}
+
+/* Los labels dentro del bloque se muestran más destacados. */
+.block-accent label {
+  font-weight: 700;
+}
+
+/* Estilo del select dentro del bloque BONUS.
+   Se cambia la línea del borde para que combine con el azul. */
+.block-accent select {
+  border-color: #9ec5fe;
+}
+
+/* Antes del contenido del bloque BONUS aparece automáticamente el texto "BONUS".
+   Esto funciona como un encabezado decorativo. */
+.block-accent::before {
+  content: "BONUS";            /* Texto que se muestra arriba */
+  display: inline-block;       /* Para poder aplicar márgenes */
+  margin-bottom: 8px;          /* Espacio debajo del texto */
+  color: #0d6efd;              /* Azul intenso (el típico de Bootstrap) */
+  font-weight: 700;            /* Negrita */
+}

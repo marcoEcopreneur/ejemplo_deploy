@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{# Esta plantilla hereda toda la estructura de "base.html" #}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}">
+{% endblock %}
+{# Aquí incluimos un archivo CSS específico para esta página (inicio.css) #}
+
+{% block contenido %}
+{# Todo este contenido reemplazará el bloque "contenido" en base.html #}
+
+<nav class="nav-personalizado d-flex justify-content-between align-items-center">
+    <h1>Bienvenido {{ session['nombre'] }}</h1>
+    {# Mostramos el nombre del usuario que está guardado en la sesión #}
+
+    <div>
+        <a href="/nueva" class="btn btn-primary me-2">Solicitar Asesoría</a>
+        {# Botón para crear una nueva asesoría #}
+
+        <a href="/salir" class="btn btn-danger">Cerrar Sesión</a>
+        {# Botón para cerrar la sesión del usuario #}
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="page-bar">
+        <h2 class="section-title">Todas las Asesorías</h2>
+    </div>
+    {# Título principal de la sección donde se listan todas las asesorías #}
+    
+    <div class="row g-3">
+        {% if asesorias|length == 0 %}
+        {# Si la lista de asesorías viene vacía, mostramos un mensaje #}
+        <div class="col-12">
+            <div class="card card-soft p-4 fade-up">
+                <div class="text-muted">No hay asesorías futuras</div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% for asesoria in asesorias %}
+        {# Recorremos todas las asesorías enviadas desde el backend #}
+
+        <div class="col-12">
+            <div class="card card-soft fade-up">
+                <div class="card-body asesoria-row">
+                    
+                    <div class="col-left">
+                        <h5 class="card-title mb-1">{{ asesoria.tema }}</h5>
+                        {# El título (tema) de la asesoría #}
+
+                        <div class="item-meta">
+                            <span class="badge-chip badge-blue">{{ asesoria.fecha }}</span>
+                        </div>
+                        {# La fecha con un estilo de “chip” para que se vea bonito #}
+                    </div>
+
+                    <div class="col-right">
+                        <div>
+                            <div><small>Solicitante: {{ asesoria.creador_nombre }}</small></div>
+                            {# Nombre de la persona que creó o pidió la asesoría #}
+
+                            <div><small>Duración: {{ asesoria.duracion }} horas</small></div>
+                            {# La duración estimada de la asesoría #}
+                        </div>
+
+                        <div class="btn-group">
+                            <a href="/ver/{{ asesoria.id }}" class="btn btn-info text-white">Ver</a>
+                            {# Botón para ver los detalles de la asesoría #}
+
+                            {% if session['usuario_id'] == asesoria.usuario_id %}
+                                {# Solo mostramos los botones Editar y Borrar si:
+                                   el usuario logueado ES el dueño de la asesoría #}
+
+                                <a href="/editar/{{ asesoria.id }}" class="btn btn-warning">Editar</a>
+                                {# Botón para editar la asesoría #}
+
+                                <a href="/borrar/{{ asesoria.id }}" class="btn btn-danger"
+                                   onclick="return confirm('¿Seguro que deseas borrar?');">
+                                   Borrar
+                                </a>
+                                {# Botón para borrar la asesoría con confirmación #}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+        {# Fin del ciclo que lista las asesorías #}
+    </div>
+</div>
+
+{% endblock %}
+{# Fin del bloque "contenido" #}
