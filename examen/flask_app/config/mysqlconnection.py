@@ -1,15 +1,18 @@
-import pymysql.cursors
+import pymysql.cursors, os
 
 class MySQLConnection:
     def __init__(self, db):
         # Cambia 'root' y 'root' por tu usuario y contraseña de MySQL
-        connection = pymysql.connect(host='localhost',
-                                    user='root', 
-                                    password='root', 
-                                    db=db,
-                                    charset='utf8mb4',
-                                    cursorclass=pymysql.cursors.DictCursor,
-                                    autocommit=True)
+        connection = pymysql.connect(
+            host=os.environ.get("MYSQL_HOST", "localhost"),
+            port=int(os.environ.get("MYSQL_PORT", 3306)),
+            user=os.environ.get("MYSQL_USER", "root"),
+            password=os.environ.get("MYSQL_PASSWORD", "root"),
+            db=db or os.environ.get("MYSQL_DB"),
+            charset='utf8mb4',
+            cursorclass=pymysql.cursors.DictCursor,
+            autocommit=True
+        )
         self.connection = connection
     
     def query_db(self, query, data=None):
