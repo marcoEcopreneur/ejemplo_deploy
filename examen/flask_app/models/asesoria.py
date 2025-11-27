@@ -1,10 +1,10 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask import flash, os
 from datetime import datetime
 
 class Asesoria:
     # Nombre de la base de datos que vamos a usar.
-    db = "esquema_asesorias"
+    db = os.environ.get("MYSQL_DB", "esquema_asesorias")
 
     def __init__(self, data):
         # Aquí recibimos un diccionario con los datos de la asesoría

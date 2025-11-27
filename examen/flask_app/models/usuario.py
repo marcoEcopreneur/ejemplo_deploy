@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask import flash, os
 import re
 import datetime
 from werkzeug.security import generate_password_hash
@@ -9,7 +9,7 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class Usuario:
     # Nombre de la base de datos
-    db = "esquema_asesorias"
+    db = os.environ.get("MYSQL_DB", "esquema_asesorias")
 
     def __init__(self, data):
         # Constructor que recibe un diccionario con datos de la DB
